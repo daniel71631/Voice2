@@ -18,6 +18,7 @@
         android:id="@+id/ViewPg"
         android:layout_width="0dp"
         android:layout_height="510dp"
+        android:background="@color/viewpagercolor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="viewpagercolor">#6f6f6f</color>
+    <color name="deletecolor">#7b8c93</color>
+    <color name="textColor">#2e2e2e</color>
 </resources>
