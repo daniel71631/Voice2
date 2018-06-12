@@ -3,11 +3,11 @@ package com.example.daniel.voice2;
 import android.Manifest;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.SpeechRecognizer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,6 +30,12 @@ public class Page1FG extends Fragment {
     private long endTime=0;
     private SharedPreferences saveUserID;
     private static final String data = "DATA";
+    private int clickCount = 0;
+    private long StartTime;
+    private long duration;
+    private long test;
+    final Handler handler = new Handler();
+
 
     public static Fragment newInstance(){
         Page1FG fragment = new Page1FG();
@@ -39,7 +45,6 @@ public class Page1FG extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //checkPermission();
 
         saveUserID=getActivity().getSharedPreferences(data,0);
 
@@ -72,8 +77,8 @@ public class Page1FG extends Fragment {
 
             @Override
             public void onEndOfSpeech() {
-
             }
+
 
             @Override
             public void onError(int i) {
@@ -83,56 +88,63 @@ public class Page1FG extends Fragment {
             @Override
             public void onResults(Bundle bundle) {
                 matches = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                getMessage=matches.get(0);
-                if(getMessage!=null && mbtn1.getText().toString()=="Listening"){
-                    mbtn1.setText(getMessage);
-                    saveUserID.edit().putString("save1", getMessage).commit();
-                }else if(getMessage!=null && mbtn2.getText().toString()=="Listening"){
-                    mbtn2.setText(getMessage);
-                    saveUserID.edit().putString("save2", getMessage).commit();
-                }else if(getMessage!=null && mbtn3.getText().toString()=="Listening"){
-                    mbtn3.setText(getMessage);
-                    saveUserID.edit().putString("save3", getMessage).commit();
-                }else if(getMessage!=null && mbtn4.getText().toString()=="Listening"){
-                    mbtn4.setText(getMessage);
-                    saveUserID.edit().putString("save4", getMessage).commit();
-                }else if(getMessage!=null && mbtn5.getText().toString()=="Listening"){
-                    mbtn5.setText(getMessage);
-                    saveUserID.edit().putString("save5", getMessage).commit();
-                }else if(getMessage!=null && mbtn6.getText().toString()=="Listening"){
-                    mbtn6.setText(getMessage);
-                    saveUserID.edit().putString("save6", getMessage).commit();
-                }else if(getMessage!=null && mbtn7.getText().toString()=="Listening"){
-                    mbtn7.setText(getMessage);
-                    saveUserID.edit().putString("save7", getMessage).commit();
-                }else if(getMessage!=null && mbtn8.getText().toString()=="Listening"){
-                    mbtn8.setText(getMessage);
-                    saveUserID.edit().putString("save8", getMessage).commit();
-                }else if(getMessage!=null && mbtn9.getText().toString()=="Listening"){
-                    mbtn9.setText(getMessage);
-                    saveUserID.edit().putString("save9", getMessage).commit();
-                }else if(getMessage!=null && mbtn10.getText().toString()=="Listening"){
-                    mbtn10.setText(getMessage);
-                    saveUserID.edit().putString("save10", getMessage).commit();
-                }else if(getMessage!=null && mbtn11.getText().toString()=="Listening"){
-                    mbtn11.setText(getMessage);
-                    saveUserID.edit().putString("save11", getMessage).commit();
-                }else if(getMessage!=null && mbtn12.getText().toString()=="Listening"){
-                    mbtn12.setText(getMessage);
-                    saveUserID.edit().putString("save12", getMessage).commit();
-                }else if(getMessage!=null && mbtn13.getText().toString()=="Listening"){
-                    mbtn13.setText(getMessage);
-                    saveUserID.edit().putString("save13", getMessage).commit();
-                }else if(getMessage!=null && mbtn14.getText().toString()=="Listening"){
-                    mbtn14.setText(getMessage);
-                    saveUserID.edit().putString("save14", getMessage).commit();
-                }else if(getMessage!=null && mbtn15.getText().toString()=="Listening"){
-                    mbtn15.setText(getMessage);
-                    saveUserID.edit().putString("save15", getMessage).commit();
-                }else if(getMessage!=null && mbtn16.getText().toString()=="Listening"){
-                    mbtn16.setText(getMessage);
-                    saveUserID.edit().putString("save16", getMessage).commit();
-                }
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+                        getMessage=matches.get(0);
+                        if(getMessage!=null && mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText(getMessage);
+                            saveUserID.edit().putString("save1", getMessage).commit();
+                        }else if(getMessage!=null && mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText(getMessage);
+                            saveUserID.edit().putString("save2", getMessage).commit();
+                        }else if(getMessage!=null && mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText(getMessage);
+                            saveUserID.edit().putString("save3", getMessage).commit();
+                        }else if(getMessage!=null && mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText(getMessage);
+                            saveUserID.edit().putString("save4", getMessage).commit();
+                        }else if(getMessage!=null && mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText(getMessage);
+                            saveUserID.edit().putString("save5", getMessage).commit();
+                        }else if(getMessage!=null && mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText(getMessage);
+                            saveUserID.edit().putString("save6", getMessage).commit();
+                        }else if(getMessage!=null && mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText(getMessage);
+                            saveUserID.edit().putString("save7", getMessage).commit();
+                        }else if(getMessage!=null && mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText(getMessage);
+                            saveUserID.edit().putString("save8", getMessage).commit();
+                        }else if(getMessage!=null && mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText(getMessage);
+                            saveUserID.edit().putString("save9", getMessage).commit();
+                        }else if(getMessage!=null && mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText(getMessage);
+                            saveUserID.edit().putString("save10", getMessage).commit();
+                        }else if(getMessage!=null && mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText(getMessage);
+                            saveUserID.edit().putString("save11", getMessage).commit();
+                        }else if(getMessage!=null && mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText(getMessage);
+                            saveUserID.edit().putString("save12", getMessage).commit();
+                        }else if(getMessage!=null && mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText(getMessage);
+                            saveUserID.edit().putString("save13", getMessage).commit();
+                        }else if(getMessage!=null && mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText(getMessage);
+                            saveUserID.edit().putString("save14", getMessage).commit();
+                        }else if(getMessage!=null && mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText(getMessage);
+                            saveUserID.edit().putString("save15", getMessage).commit();
+                        }else if(getMessage!=null && mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText(getMessage);
+                            saveUserID.edit().putString("save16", getMessage).commit();
+                        }
+                    }
+                }, 100);
+
             }
 
             @Override
@@ -145,13 +157,15 @@ public class Page1FG extends Fragment {
 
             }
         });
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.page1fg, container, false);
+        final View view = inflater.inflate(R.layout.page1fg, container, false);
         iniview(view);
         checkPermission();
+
         mbtn1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -159,25 +173,84 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn1.setText("Listening");
+                        //startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+
                         startTime=event.getEventTime();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
                         endTime=event.getEventTime();
+                        mSpeechRecognizer.stopListening();
+
+                        long time = event.getEventTime() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 400)
+                            {
+                                mbtn1.setText("");
+                                saveUserID.edit().remove("save1").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn1.setText("");
                     saveUserID.edit().remove("save1").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
-        if(mbtn1.getText().toString()==null && saveUserID!=null){
-            mbtn1.setText(saveUserID.getString("save1",""));
-        }
 
         mbtn2.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -186,23 +259,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn2.setText("Listening");
+
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
                         startTime=event.getEventTime();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = event.getEventTime() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 400)
+                            {
+                                mbtn2.setText("");
+                                saveUserID.edit().remove("save2").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if( endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn2.setText("");
                     saveUserID.edit().remove("save2").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -214,23 +344,81 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn3.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        //mSpeechRecognizer.stopListening();
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn3.setText("");
+                                saveUserID.edit().remove("save3").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn3.setText("");
                     saveUserID.edit().remove("save3").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -242,23 +430,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn4.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn4.setText("");
+                                saveUserID.edit().remove("save4").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000 ){
                     Log.d(TAG,"TEST");
                     mbtn4.setText("");
                     saveUserID.edit().remove("save4").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -270,23 +515,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn5.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn5.setText("");
+                                saveUserID.edit().remove("save5").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn5.setText("");
                     saveUserID.edit().remove("save5").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -298,23 +600,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn6.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn6.setText("");
+                                saveUserID.edit().remove("save6").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn6.setText("");
                     saveUserID.edit().remove("save6").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -326,23 +685,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn7.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn7.setText("");
+                                saveUserID.edit().remove("save7").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn7.setText("");
                     saveUserID.edit().remove("save7").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -354,23 +770,79 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn8.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn8.setText("");
+                                saveUserID.edit().remove("save8").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn8.setText("");
                     saveUserID.edit().remove("save8").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -382,23 +854,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn9.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn9.setText("");
+                                saveUserID.edit().remove("save9").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn9.setText("");
                     saveUserID.edit().remove("save9").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -410,23 +939,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn10.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn10.setText("");
+                                saveUserID.edit().remove("save10").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn10.setText("");
                     saveUserID.edit().remove("save10").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -437,23 +1023,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn11.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn11.setText("");
+                                saveUserID.edit().remove("save11").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn11.setText("");
                     saveUserID.edit().remove("save11").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -465,23 +1108,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn12.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn12.setText("");
+                                saveUserID.edit().remove("save12").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn12.setText("");
                     saveUserID.edit().remove("save12").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -493,23 +1193,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn13.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn13.setText("");
+                                saveUserID.edit().remove("save13").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn13.setText("");
                     saveUserID.edit().remove("save13").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -521,23 +1278,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn14.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn14.setText("");
+                                saveUserID.edit().remove("save14").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn14.setText("");
                     saveUserID.edit().remove("save14").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -548,23 +1362,80 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn15.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+                        if(mbtn16.getText().toString()=="Listening"){
+                            mbtn16.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn15.setText("");
+                                saveUserID.edit().remove("save15").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn15.setText("");
                     saveUserID.edit().remove("save15").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -576,23 +1447,79 @@ public class Page1FG extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
                         mbtn16.setText("Listening");
-                        startTime=event.getEventTime();
+
+                        if(mbtn2.getText().toString()=="Listening"){
+                            mbtn2.setText("");
+                        }
+                        if(mbtn3.getText().toString()=="Listening"){
+                            mbtn3.setText("");
+                        }
+                        if(mbtn4.getText().toString()=="Listening"){
+                            mbtn4.setText("");
+                        }
+                        if(mbtn5.getText().toString()=="Listening"){
+                            mbtn5.setText("");
+                        }
+                        if(mbtn6.getText().toString()=="Listening"){
+                            mbtn6.setText("");
+                        }
+                        if(mbtn7.getText().toString()=="Listening"){
+                            mbtn7.setText("");
+                        }
+                        if(mbtn8.getText().toString()=="Listening"){
+                            mbtn8.setText("");
+                        }
+                        if(mbtn9.getText().toString()=="Listening"){
+                            mbtn9.setText("");
+                        }
+                        if(mbtn10.getText().toString()=="Listening"){
+                            mbtn10.setText("");
+                        }
+                        if(mbtn11.getText().toString()=="Listening"){
+                            mbtn11.setText("");
+                        }
+                        if(mbtn12.getText().toString()=="Listening"){
+                            mbtn12.setText("");
+                        }
+                        if(mbtn13.getText().toString()=="Listening"){
+                            mbtn13.setText("");
+                        }
+                        if(mbtn14.getText().toString()=="Listening"){
+                            mbtn14.setText("");
+                        }
+                        if(mbtn15.getText().toString()=="Listening"){
+                            mbtn15.setText("");
+                        }
+                        if(mbtn1.getText().toString()=="Listening"){
+                            mbtn1.setText("");
+                        }
+
+                        //startTime=event.getEventTime();
+                        startTime=System.currentTimeMillis();
+                        clickCount++;
                         break;
                     case MotionEvent.ACTION_UP:
-                        mSpeechRecognizer.stopListening();
-                        if(getMessage==null){
-                            Log.d(TAG,"catch failed");
-                        }
                         endTime=event.getEventTime();
-                        //Log.d(TAG,matches.get(0)+"catch success");
+                        mSpeechRecognizer.stopListening();
+                        long time = System.currentTimeMillis() - startTime;
+                        duration=  duration + time;
+                        if(clickCount==2){
+                            if(duration <= 500)
+                            {
+                                mbtn16.setText("");
+                                saveUserID.edit().remove("save16").commit();
+                            }
+                            clickCount = 0;
+                            duration = 0;
+                        }
                         break;
                 }
-                if(endTime-startTime>2500){
+                /*if(endTime-startTime>2000){
                     Log.d(TAG,"TEST");
                     mbtn16.setText("");
                     saveUserID.edit().remove("save16").commit();
                     return true;
-                }
+                }*/
                 return false;
             }
         });
@@ -644,7 +1571,7 @@ public class Page1FG extends Fragment {
         mbtn13=(Button)view.findViewById(R.id.btn13);
         mbtn14=(Button)view.findViewById(R.id.btn14);
         mbtn15=(Button)view.findViewById(R.id.btn15);
-        mbtn16=(Button)view.findViewById(R.id.btn16);
+        mbtn16=(Button)view.findViewById(R.id.btn16_3);
 
         if(saveUserID.contains("save1")){
             getMessagefromSP1=saveUserID.getString("save1", "");
@@ -759,19 +1686,7 @@ public class Page1FG extends Fragment {
             mbtn16.setText("");
         }
 
-
     }
-
-    /*private void checkPermission() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            if (!(android.support.v4.content.ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED)) {
-                android.content.Intent intent = new android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        android.net.Uri.parse("package:" + getActivity().getPackageName()));
-                startActivity(intent);
-                getActivity().finish();
-            }
-        }
-    }*/
 
     private void checkPermission() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -781,12 +1696,12 @@ public class Page1FG extends Fragment {
                 ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.RECORD_AUDIO},
                         1);
-                //getActivity().finish();
             }
         }
     }
 
     @Override
+
     public void onDestroy() {
         super.onDestroy();
     }
